@@ -13,13 +13,22 @@ npm install --save github:ControlSpaceSoftware/cs-xhr-wrapper
 import {GetServiceFactory} from 'cs-xhr-wrapper'
 const getAuthorization = () => {/* return jwt*/};
 const get = GetServiceFactory(getAuthorization);
-get(url)
+const api = get(url, headers)
 	.then((response) => response.json())
 	.then((result) => console.log(result))
 	.catch(console.error);
+	// if you need to abort request
+	api.abort();
 ```
 
 ```
 import {PostServiceFactory} from 'cs-xhr-wrapper'
 const getAuthorization = () => {/* return jwt*/};
-const post = PostServiceFactory({fetch, getAuthorization})
+// note inject the fetch api object
+const post = PostServiceFactory({fetch, getAuthorization});
+post(url, body, headers)
+	.then((response) => response.json())
+	.then((result) => console.log(result))
+	.catch(console.error);
+// note: no abort api on post service
+```
