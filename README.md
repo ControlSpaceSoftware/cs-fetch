@@ -24,11 +24,11 @@ const api = get(url, headers)
 ```
 import {PostServiceFactory} from 'cs-xhr-wrapper'
 const getAuthorization = () => {/* return jwt*/};
-// note inject the fetch api object
-const post = PostServiceFactory({fetch, getAuthorization});
+// inject the fetch api object
+const post = PostServiceFactory(fetch, getAuthorization);
 post(url, body, headers)
 	.then((response) => response.json())
 	.then((result) => console.log(result))
 	.catch(console.error);
-// note: no abort api on post service
+// no abort api on post service
 ```
