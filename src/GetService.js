@@ -77,9 +77,11 @@ export function createCORSRequest(method, url) {
 	return xhr;
 }
 
-export default function GetServiceFactory({getAuthorization, abortLast}, xhrFactory = createCORSRequest) {
+export default function GetServiceFactory(options, xhrFactory = createCORSRequest) {
 
 	let lastGet;
+	const getAuthorization = options.getAuthorization;
+	const abortLast = options.abortLast;
 
 	if (!(getAuthorization && typeof getAuthorization === 'function')) {
 		throw new TypeError('required "getAuthorization" parameter must be a function');
