@@ -1,7 +1,7 @@
 export class PostService {
 
-	constructor(fetch, loadIdToken) {
-		this.loadIdToken = loadIdToken;
+	constructor(fetch, getAuthorization) {
+		this.getAuthorization = getAuthorization;
 		this.post = this.post.bind(this, fetch);
 	}
 
@@ -21,7 +21,7 @@ export class PostService {
 		}
 
 		return new Promise((resolve, reject) => {
-			this.loadIdToken().then(({jwt, expiresOn}) => {
+			this.getAuthorization().then(({jwt, expiresOn}) => {
 				const options = this.options;
 				Object.assign(options.headers, headers);
 				options.headers['Authorization'] = jwt;
@@ -38,17 +38,17 @@ export class PostService {
 
 }
 
-export default function PostServiceFactory({fetch, loadIdToken}) {
+export default function PostServiceFactory(fetch, getAuthorization) {
 
 	if (!(fetch && typeof fetch === 'function')) {
 		throw new TypeError('required "fetch" parameter must be a function');
 	}
 
-	if (!(loadIdToken && typeof loadIdToken === 'function')) {
-		throw new TypeError('required "loadIdToken" parameter must be a function');
+	if (!(getAuthorization && typeof getAuthorization === 'function')) {
+		throw new TypeError('required "getAuthorization" parameter must be a function');
 	}
 
-	const postService = new PostService(fetch, loadIdToken);
+	const postService = new PostService(fetch, getAuthorization);
 
 	return (url, body, headers) => postService.post(url, body, headers);
 

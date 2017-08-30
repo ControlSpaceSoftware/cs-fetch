@@ -1,7 +1,7 @@
 export class GetService {
 
-	constructor(loadIdToken, xhrFactory) {
-		this.loadIdToken = loadIdToken;
+	constructor(getAuthorization, xhrFactory) {
+		this.getAuthorization = getAuthorization;
 		this.get = this.get.bind(this, xhrFactory);
 	}
 
@@ -32,7 +32,7 @@ export class GetService {
 			xhr.onerror = function (err) {
 				reject(err);
 			};
-			this.loadIdToken().then((token) => {
+			this.getAuthorization().then((token) => {
 				headers = Object.assign({}, {
 					'Content-Type': 'application/json',
 					'Authorization': token.jwt}, headers);
@@ -77,17 +77,17 @@ export function createCORSRequest(method, url) {
 	return xhr;
 }
 
-export default function GetServiceFactory(loadIdToken, xhrFactory = createCORSRequest) {
+export default function GetServiceFactory(getAuthorization, xhrFactory = createCORSRequest) {
 
-	if (!(loadIdToken && typeof loadIdToken === 'function')) {
-		throw new TypeError('required "loadIdToken" parameter must be a function');
+	if (!(getAuthorization && typeof getAuthorization === 'function')) {
+		throw new TypeError('required "getAuthorization" parameter must be a function');
 	}
 
 	if (!(xhrFactory && typeof xhrFactory === 'function')) {
 		throw new TypeError('required "xhrFactory" parameter must be a function');
 	}
 
-	const getService = new GetService(loadIdToken, xhrFactory);
+	const getService = new GetService(getAuthorization, xhrFactory);
 
 	return (url, headers) => getService.get(url, headers);
 
