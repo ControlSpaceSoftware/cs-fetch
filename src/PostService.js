@@ -38,7 +38,7 @@ export class PostService {
 
 }
 
-export default function PostServiceFactory({getAuthorization, fetch}) {
+export default function postServiceFactory({getAuthorization, fetch}) {
 
 	if (!(fetch && typeof fetch === 'function')) {
 		throw new TypeError('required "fetch" parameter must be a function');

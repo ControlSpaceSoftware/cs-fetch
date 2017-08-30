@@ -1,5 +1,4 @@
-export {default as PostServiceFactory} from './PostService'
+export {default as postServiceFactory} from './PostService'
 export {PostService as POST} from './PostService'
-export {default as GetServiceFactory} from './GetService'
+export {default as getServiceFactory} from './GetService'
 export {GetService as GET} from './GetService'
-export {default as GetAbortLastService} from './GetAbortLastService'

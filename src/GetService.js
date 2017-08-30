@@ -77,7 +77,7 @@ export const createCORSRequest = (method, url) => {
 	return xhr;
 }
 
-export default function GetServiceFactory({getAuthorization, abortLast, xhrFactory}) {
+export default function getServiceFactory({getAuthorization, abortLast, xhrFactory}) {
 
 	let lastGet;
 
