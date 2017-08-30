@@ -3,6 +3,7 @@
 	"description": "wrap xhr with authorization and cancel",
 	"version": "0.0.5",
 	"private": true,
+	"main": "lib/index.js",
 	"dependencies": {},
 	"scripts": {
 		"help": "build-scripts help",
