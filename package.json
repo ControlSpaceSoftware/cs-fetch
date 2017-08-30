@@ -1,7 +1,7 @@
 {
 	"name": "cs-xhr-wrapper",
 	"description": "wrap xhr with authorization and cancel",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"private": true,
 	"main": "lib/index.js",
 	"dependencies": {},
