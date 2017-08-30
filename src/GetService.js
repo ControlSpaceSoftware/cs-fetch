@@ -61,7 +61,7 @@ export class GetService {
 
 }
 
-export function createCORSRequest(method, url) {
+export const createCORSRequest = (method, url) => {
 	let xhr = new XMLHttpRequest();
 	if ('withCredentials' in xhr) {
 		// XHR for Chrome/Firefox/Opera/Safari.
@@ -77,16 +77,15 @@ export function createCORSRequest(method, url) {
 	return xhr;
 }
 
-export default function GetServiceFactory(options, xhrFactory = createCORSRequest) {
+export default function GetServiceFactory({getAuthorization, abortLast, xhrFactory}) {
 
 	let lastGet;
-	const getAuthorization = options.getAuthorization;
-	const abortLast = options.abortLast;
 
 	if (!(getAuthorization && typeof getAuthorization === 'function')) {
 		throw new TypeError('required "getAuthorization" parameter must be a function');
 	}
 
+	xhrFactory = xhrFactory || createCORSRequest;
 	if (!(xhrFactory && typeof xhrFactory === 'function')) {
 		throw new TypeError('required "xhrFactory" parameter must be a function');
 	}
