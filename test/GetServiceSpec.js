@@ -38,14 +38,14 @@ describe('GetServiceFactory', () => {
 		expect(GetServiceFactory).to.be.a('function');
 	});
 	it('throws missing getAuthorization function', () => {
-		expect(GetServiceFactory.bind(null, null)).to.throw('required "getAuthorization" parameter must be a function');
+		expect(GetServiceFactory.bind(null, {})).to.throw('required "getAuthorization" parameter must be a function');
 	});
 	it('throws missing xhrFactory function', () => {
-		expect(GetServiceFactory.bind(null, getAuthorization, null)).to.throw('required "xhrFactory" parameter must be a function');
+		expect(GetServiceFactory.bind(null, {getAuthorization}, null)).to.throw('required "xhrFactory" parameter must be a function');
 	});
 	describe('get(url, headers)', () => {
 		it('returns get results', () => {
-			const get = GetServiceFactory(getAuthorization, xhrFactory);
+			const get = GetServiceFactory({getAuthorization}, xhrFactory);
 			return get('https://test.com/url').then((result) => {
 				expect(result.json()).to.eql({test: 'get resolve'});
 			});
@@ -53,14 +53,14 @@ describe('GetServiceFactory', () => {
 		it('does not call xhr.send() if getAuthorization fails', () => {
 			xhr.send = sinon.spy();
 			getAuthorization = sinon.stub().returns(Promise.reject({test: 'getAuthorization reject'}));
-			const get = GetServiceFactory(getAuthorization, xhrFactory);
+			const get = GetServiceFactory({getAuthorization}, xhrFactory);
 			return get('https://test.com/url').catch((result) => {
 				expect(result).to.eql({test: 'getAuthorization reject'});
 				expect(xhr.send).not.to.have.been.called;
 			});
 		});
 		it('sets the Authorization and CORS options', () => {
-			const get = GetServiceFactory(getAuthorization, xhrFactory);
+			const get = GetServiceFactory({getAuthorization}, xhrFactory);
 			return get('https://test url').then((result) => {
 				expect(xhr.headers).to.eql({
 					Authorization: "test jwt",

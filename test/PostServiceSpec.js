@@ -21,28 +21,28 @@ describe('PostServiceFactory', () => {
 		expect(PostServiceFactory).to.be.a('function');
 	});
 	it('throws missing fetch function', () => {
-		expect(PostServiceFactory.bind(null)).to.throw('required "fetch" parameter must be a function');
+		expect(PostServiceFactory.bind(null, {})).to.throw('required "fetch" parameter must be a function');
 	});
 	it('throws missing getAuthorization function', () => {
-		expect(PostServiceFactory.bind(null, fetch)).to.throw('required "getAuthorization" parameter must be a function');
+		expect(PostServiceFactory.bind(null, {fetch})).to.throw('required "getAuthorization" parameter must be a function');
 	});
 	describe('post(url, body, headers)', () => {
 		it('returns post results', () => {
-			const post = PostServiceFactory(fetch, getAuthorization);
+			const post = PostServiceFactory({fetch, getAuthorization});
 			return post('https://test.com/url').then((result) => {
 				expect(result).to.eql({test: 'fetch resolve'});
 			});
 		});
 		it('does not call fetch if getAuthorization fails', () => {
 			getAuthorization = sinon.stub().returns(Promise.reject({test: 'getAuthorization reject'}));
-			const post = PostServiceFactory(fetch, getAuthorization);
+			const post = PostServiceFactory({fetch, getAuthorization});
 			return post('https://test.com/url').catch((result) => {
 				expect(result).to.eql({test: 'getAuthorization reject'});
 				expect(fetch).not.to.have.been.called;
 			});
 		});
 		it('sets the Authorization and CORS options', () => {
-			const post = PostServiceFactory(fetch, getAuthorization);
+			const post = PostServiceFactory({fetch, getAuthorization});
 			return post('https://test url').then((result) => {
 				expect(fetch).to.have.been.calledWith('https://test url', {
 					body: undefined,
