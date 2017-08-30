@@ -1,0 +1,30 @@
+{
+	"name": "cs-xhr-wrapper",
+	"description": "wrap xhr with authorization and cancel",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {},
+	"scripts": {
+		"help": "build-scripts help",
+		"scripts": "build-scripts scripts",
+		"resources": "build-scripts resources",
+		"compile": "build-scripts compile",
+		"test": "build-scripts test",
+		"commit": "build-scripts commit",
+		"patch": "build-scripts patch",
+		"push": "build-scripts push",
+		"patch-push": "build-scripts patch-push",
+		"clean": "build-scripts clean",
+		"zip": "build-scripts zip",
+		"package-lambda": "build-scripts package-lambda",
+		"upload-lambda": "build-scripts upload-lambda"
+	},
+	"babel": {
+		"presets": [
+			"env"
+		]
+	},
+	"devDependencies": {
+		"build-scripts": "github:ControlSpaceSoftware/build-scripts"
+	}
+}
