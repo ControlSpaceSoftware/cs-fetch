@@ -40,6 +40,11 @@ export class PostService {
 
 export default function postServiceFactory({getAuthorization, fetch}) {
 
+	// we inject fetch so we can test function with 100% coverage
+
+	// default to the browser fetch api if it exists
+	fetch = fetch || (typeof window !== 'undefined' ? window.fetch : null);
+
 	if (!(fetch && typeof fetch === 'function')) {
 		throw new TypeError('required "fetch" parameter must be a function');
 	}

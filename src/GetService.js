@@ -16,7 +16,7 @@ export class GetService {
 		const xhr = xhrFactory('GET', url);
 		const xhrPromise = new Promise((resolve, reject) => {
 			if (!xhr) {
-				reject(new TypeError('cors not supported'));
+				reject(new TypeError('CORS not supported'));
 				return;
 			}
 			xhr.onload = function () {
@@ -61,20 +61,22 @@ export class GetService {
 
 }
 
-export const createCORSRequest = (method, url) => {
-	let xhr = new XMLHttpRequest();
-	if ('withCredentials' in xhr) {
-		// XHR for Chrome/Firefox/Opera/Safari.
-		xhr.open(method, url, true);
-	} else if (typeof XDomainRequest !== 'undefined') {
-		// XDomainRequest for IE.
-		xhr = new XDomainRequest();
-		xhr.open(method, url);
-	} else {
-		// CORS not supported.
-		xhr = null;
+export function createCORSRequest(method, url) {
+	if (typeof XMLHttpRequest !== 'undefined') {
+		let xhr = new XMLHttpRequest();
+		if ('withCredentials' in xhr) {
+			// XHR for Chrome/Firefox/Opera/Safari.
+			xhr.open(method, url, true);
+		} else if (typeof XDomainRequest !== 'undefined') {
+			// XDomainRequest for IE.
+			xhr = new XDomainRequest();
+			xhr.open(method, url);
+		} else {
+			// CORS not supported.
+			xhr = null;
+		}
+		return xhr;
 	}
-	return xhr;
 }
 
 export default function getServiceFactory({getAuthorization, abortLast, xhrFactory}) {
@@ -85,7 +87,9 @@ export default function getServiceFactory({getAuthorization, abortLast, xhrFacto
 		throw new TypeError('required "getAuthorization" parameter must be a function');
 	}
 
+	// we inject xhrFactory so we can test function with 100% coverage
 	xhrFactory = xhrFactory || createCORSRequest;
+
 	if (!(xhrFactory && typeof xhrFactory === 'function')) {
 		throw new TypeError('required "xhrFactory" parameter must be a function');
 	}
