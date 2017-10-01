@@ -51,6 +51,7 @@ export class GetService {
 		return {
 			abort() {
 				xhr.abort();
+				return xhrPromise;
 			},
 			then(fn) {
 				return xhrPromise.then(fn);

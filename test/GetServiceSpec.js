@@ -21,12 +21,18 @@ describe('getServiceFactory', () => {
 			set onload(fn) {
 				this._onload = fn;
 			},
+			set onabort(fn) {
+				this._onabort = fn;
+			},
 			setRequestHeader(name, value) {
 				this.headers[name] = value;
 			},
 			send() {
 				this.responseText = JSON.stringify({test: 'get resolve'});
 				this._onload();
+			},
+			abort() {
+				this._onabort();
 			}
 		};
 		xhrFactory = () => {
@@ -66,6 +72,15 @@ describe('getServiceFactory', () => {
 					Authorization: "test jwt",
 					'Content-Type': "application/json"
 				});
+			});
+		});
+		it('rejects when abort() is called', () => {
+			xhr.send = sinon.spy();
+			const get = getServiceFactory({getAuthorization, xhrFactory});
+			const GET = get('https://test.com/url');
+			GET.abort();
+			return GET.catch((result) => {
+				expect(result).to.eql('aborted');
 			});
 		});
 	});
