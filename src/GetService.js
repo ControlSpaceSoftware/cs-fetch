@@ -49,9 +49,9 @@ export class GetService {
 		});
 
 		return {
-			abort() {
+			abort(fn) {
 				xhr.abort();
-				return xhrPromise;
+				return xhrPromise.catch(fn);
 			},
 			then(fn) {
 				return xhrPromise.then(fn);
