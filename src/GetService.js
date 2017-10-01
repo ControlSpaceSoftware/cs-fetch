@@ -32,6 +32,9 @@ export class GetService {
 			xhr.onerror = function (err) {
 				reject(err);
 			};
+			xhr.onabort = function () {
+				reject('aborted');
+			};
 			this.getAuthorization().then((token) => {
 				headers = Object.assign({}, {
 					'Content-Type': 'application/json',
