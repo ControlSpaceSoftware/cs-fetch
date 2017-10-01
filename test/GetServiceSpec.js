@@ -50,7 +50,7 @@ describe('getServiceFactory', () => {
 		expect(getServiceFactory.bind(null, {getAuthorization, xhrFactory: 'foo'})).to.throw('required "xhrFactory" parameter must be a function');
 	});
 	describe('get(url, headers)', () => {
-		it('returns get results', () => {
+		it('returns correct results', () => {
 			const get = getServiceFactory({getAuthorization, xhrFactory});
 			return get('https://test.com/url').then((result) => {
 				expect(result.json()).to.eql({test: 'get resolve'});
@@ -74,14 +74,21 @@ describe('getServiceFactory', () => {
 				});
 			});
 		});
-		it('rejects when abort() is called', () => {
+		it('abortLast aborts last get()', (done) => {
 			xhr.send = sinon.spy();
-			const get = getServiceFactory({getAuthorization, xhrFactory});
-			const GET = get('https://test.com/url');
-			GET.abort();
-			return GET.catch((result) => {
-				expect(result).to.eql('aborted');
+			const get = getServiceFactory({getAuthorization, xhrFactory, abortLast: true});
+			const catch1 = sinon.spy();
+			const catch2 = sinon.spy();
+			const promise1 = get('https://test.com/url/1').catch(catch1).then(() => {
+				expect(catch1).to.have.been.calledWith('aborted');
 			});
+			xhr.send = function () {
+				this._onload();
+			};
+			const promise2 = get('https://test.com/url/2').catch(catch2).then(() => {
+				expect(catch2).not.to.have.been.called;
+			});
+			Promise.all([promise1, promise2]).then(() => done());
 		});
 	});
 });

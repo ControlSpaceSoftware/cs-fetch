@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dbc29907-fa7b-4275-bd1f-2c6d79377608" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GetService.js" afterPath="$PROJECT_DIR$/src/GetService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/GetServiceSpec.js" afterPath="$PROJECT_DIR$/test/GetServiceSpec.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,8 +20,8 @@
       <file leaf-file-name="GetService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GetService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="53" column="33" lean-forward="false" selection-start-line="53" selection-start-column="33" selection-end-line="53" selection-end-column="33" />
+            <state relative-caret-position="184">
+              <caret line="53" column="33" lean-forward="false" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -29,8 +30,8 @@
       <file leaf-file-name="GetServiceSpec.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/GetServiceSpec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="80" column="24" lean-forward="false" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
+            <state relative-caret-position="340">
+              <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -171,12 +172,12 @@
       <updated>1506440874945</updated>
       <workItem from="1506440876125" duration="1605000" />
       <workItem from="1506516027015" duration="21000" />
-      <workItem from="1506861922579" duration="3511000" />
+      <workItem from="1506861922579" duration="5453000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5137000" />
+    <option name="totallyTimeSpent" value="7079000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="59" y="23" width="1380" height="827" extended-state="0" />
@@ -341,16 +342,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GetService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="53" column="33" lean-forward="false" selection-start-line="53" selection-start-column="33" selection-end-line="53" selection-end-column="33" />
+        <state relative-caret-position="184">
+          <caret line="53" column="33" lean-forward="false" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/GetServiceSpec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="80" column="24" lean-forward="false" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
+        <state relative-caret-position="340">
+          <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
           <folding />
         </state>
       </provider>
